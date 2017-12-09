@@ -22,5 +22,6 @@ foreach (explode("\r\n", $headers) as $header) {
 }
 
 header('Access-Control-Allow-Origin: *');
+header_remove('Transfer-Encoding');
 
 echo $body;
