@@ -17,6 +17,10 @@ function getHeadersAsStrings(): array
     return $strings;
 }
 
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    die();
+}
+
 $url = ltrim($_SERVER['REQUEST_URI'], '/');
 
 $ch = curl_init();
