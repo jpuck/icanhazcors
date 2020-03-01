@@ -1,5 +1,9 @@
 <?php
 
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Headers: *');
+header('Access-Control-Allow-Methods: *');
+
 function getHeadersAsStrings(): array
 {
     $strings = [];
@@ -35,7 +39,6 @@ foreach (explode("\r\n", $headers) as $header) {
     header($header);
 }
 
-header('Access-Control-Allow-Origin: *');
 header_remove('Transfer-Encoding');
 
 echo $body;
