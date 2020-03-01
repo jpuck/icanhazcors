@@ -1,5 +1,18 @@
 <?php
 
+function getHeadersAsStrings(): array
+{
+    $strings = [];
+    $headers = getallheaders();
+    unset($headers['Host']);
+
+    foreach ($headers as $name => $value) {
+        $strings []= "$name: $value";
+    }
+
+    return $strings;
+}
+
 $url = ltrim($_SERVER['REQUEST_URI'], '/');
 
 $ch = curl_init();
@@ -8,6 +21,7 @@ curl_setopt($ch, CURLOPT_URL, $url);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 curl_setopt($ch, CURLOPT_VERBOSE, 1);
 curl_setopt($ch, CURLOPT_HEADER, 1);
+curl_setopt($ch, CURLOPT_HTTPHEADER, getHeadersAsStrings());
 
 $response = curl_exec($ch);
 
